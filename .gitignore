@@ -41,4 +41,5 @@ octave-workspace
 *.slxc
 
 # Custom folder for results
-results*/*
+*.xlsx
+results
