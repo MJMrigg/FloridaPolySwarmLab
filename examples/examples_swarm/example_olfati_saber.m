@@ -50,7 +50,6 @@ if exist('app', 'var')
     % Debug plot
     DEBUG = app.debug_plot;
 end
-p_swarm.nb_agents = 10;
 
 if DRONE_TYPE == "point_mass"
    SWARM_VIEWER_TYPE = "agent";
