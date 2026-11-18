@@ -9,7 +9,7 @@ addpath(genpath(project_root));
 
 %% Simulation options
 
-DRONE_TYPE = "point_mass"; % swarming mode supports quadcopter and point_mass
+DRONE_TYPE = "quadcopter"; % swarming mode supports quadcopter and point_mass
 ACTIVE_ENVIRONMENT = true;
 DEBUG = true;
 VIDEO = true;
@@ -57,6 +57,9 @@ elseif DRONE_TYPE == "quadcopter"
    SWARM_VIEWER_TYPE = "drone";
 end
 
+p_swarm.nb_agents = 1024;
+p_sim.end_time = 100;
+
 
 %% Call parameters files
 
@@ -92,6 +95,8 @@ if VIDEO
     video_filename = strcat(erase(mfilename, "example_"), '_', date_string);
     video_filepath = strcat(results_dirname, '/', video_filename);
     video = VideoWriterWithRate(video_filepath, p_sim.dt_video);
+    clear video_filepath;
+    clear video_filename;
 end
 
 % Init viewer
@@ -155,6 +160,8 @@ end
 
 if VIDEO
     video.close(); 
+    clear video;
+    clear VIDEO;
 end
 
 % Close all plots
@@ -173,7 +180,7 @@ if DEBUG && ~isempty(results_dirname)
     pos_ned_history = swarm.get_pos_ned_history();
     pos_ned_history = pos_ned_history(2:end,:);
     vel_ned_history = swarm.get_vel_xyz_history();
-    accel_history = [zeros(1, p_swarm.nb_agents*3); ...
+    accel_history = [zeros(1, p_swarm.nb_agents*3);
         diff(vel_ned_history,1)/p_sim.dt];
     
     % Save workspace

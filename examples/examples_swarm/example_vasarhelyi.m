@@ -9,7 +9,7 @@ addpath(genpath(project_root));
 
 %% Simulation options
 
-DRONE_TYPE = "point_mass"; % swarming mode supports only quadcopter and point_mass
+DRONE_TYPE = "quadcopter"; % swarming mode supports only quadcopter and point_mass
 ACTIVE_ENVIRONMENT = true;
 DEBUG = true;
 VIDEO = true;
@@ -50,6 +50,9 @@ if exist('app', 'var')
     % Debug plot
     DEBUG = app.debug_plot;
 end
+
+p_swarm.nb_agents = 4;
+p_sim.end_time = 100;
 
 if DRONE_TYPE == "point_mass"
    SWARM_VIEWER_TYPE = "agent";

@@ -576,6 +576,11 @@ classdef Drone < handle
                 self.pos_ned_history = [self.pos_ned_history; self.pos_ned'];
             end
             self.vel_xyz = x_new(4:6)';
+            if isempty(self.vel_xyz_history)
+                self.vel_xyz_history = self.vel_xyz';
+            else
+                self.vel_xyz_history = [self.vel_xyz_history; self.vel_xyz'];
+            end
             self.attitude = x_new(7:9)';
             self.rates = x_new(10:12)';
 
